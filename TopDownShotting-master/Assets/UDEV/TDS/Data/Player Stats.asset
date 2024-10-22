@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3ed41419ec729479199e8a9402a8cb, type: 3}
   m_Name: Player Stats
   m_EditorClassIdentifier: 
-  hp: 25
+  hp: 57.5
   damage: 1
   moveSpeed: 700
   knockbackForce: 100
   knockbackTime: 0.8
   invincibleTime: 1
-  level: 1
+  level: 6
   maxLevel: 100
-  xp: 0
-  levelUpXpRequired: 25
+  xp: 161.23273
+  levelUpXpRequired: 187.5
   levelUpXpRequiredUp: 50
   hpUp: 10

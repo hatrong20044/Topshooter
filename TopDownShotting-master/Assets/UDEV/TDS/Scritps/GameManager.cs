@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +25,9 @@ public class GameManager : Singleton<GameManager>
     private Map m_map;
     private Player m_player;
     private int m_curLife;
+
+
+    private List<Enemy> remainingEnemies;
 
     private PlayerStats m_playerStats;
     public Player Player { get => m_player;private set => m_player = value; }
@@ -84,10 +87,16 @@ public class GameManager : Singleton<GameManager>
 
     private void SpawnEnemy()
     {
-        var randomEnemy = GetRandomEnemy();
-        if(randomEnemy ==null||m_map==null) return;
-        StartCoroutine(SpawnEnemy_Coroutine(randomEnemy));
+        if (m_enemyPrefabs == null || m_enemyPrefabs.Length <= 0 || m_map == null) return;
+        StartCoroutine(SpawnEnemy_Coroutine());
     }
+
+    //private void SpawnEnemy()
+    //{
+    //    var randomEnemy = GetRandomEnemy();
+    //    if (randomEnemy == null || m_map == null) return;
+    //    StartCoroutine(SpawnEnemy_Coroutine(randomEnemy));
+    //}
 
     private Enemy GetRandomEnemy()
     {
@@ -98,25 +107,52 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private IEnumerator SpawnEnemy_Coroutine(Enemy randomEnemy)
+
+
+    //private IEnumerator SpawnEnemy_Coroutine(Enemy randomEnemy)
+    //{
+    //    yield return new WaitForSeconds(3f);
+
+    //    while (state == GameState.PLAYING)
+    //    {
+    //        if (m_map.RandomAISpawnPoint == null) break;
+    //        Vector3 spawnPoint = m_map.RandomAISpawnPoint.position;
+    //        if (m_enemySpawnVfx)
+    //            Instantiate(m_enemySpawnVfx, spawnPoint, Quaternion.identity);
+    //        yield return new WaitForSeconds(0.2f);
+    //        Instantiate(randomEnemy, spawnPoint, Quaternion.identity);
+
+    //        yield return new WaitForSeconds(m_enemySpawnTime);
+
+
+    //    }
+    //    yield return null;
+    //}
+
+    private IEnumerator SpawnEnemy_Coroutine()
     {
         yield return new WaitForSeconds(3f);
-      
-        while(state==GameState.PLAYING)
+
+        while (state == GameState.PLAYING)
         {
             if (m_map.RandomAISpawnPoint == null) break;
-            Vector3 spawnPoint =m_map.RandomAISpawnPoint.position;
-            if(m_enemySpawnVfx)
+
+            // Lấy ngẫu nhiên một enemy mỗi lần spawn
+            var randomEnemy = GetRandomEnemy();
+            Vector3 spawnPoint = m_map.RandomAISpawnPoint.position;
+
+            if (m_enemySpawnVfx)
                 Instantiate(m_enemySpawnVfx, spawnPoint, Quaternion.identity);
+
             yield return new WaitForSeconds(0.2f);
+
             Instantiate(randomEnemy, spawnPoint, Quaternion.identity);
 
             yield return new WaitForSeconds(m_enemySpawnTime);
-
-
         }
         yield return null;
     }
+
 
 
     public void GameOverChecking(Action OnLostLife = null,Action OnDead = null)
@@ -129,7 +165,7 @@ public class GameManager : Singleton<GameManager>
         {
             state= GameState.GAMEOVER;
             OnDead?.Invoke();
-            Debug.Log("Gameover!!");
+            
         }
     }
 
