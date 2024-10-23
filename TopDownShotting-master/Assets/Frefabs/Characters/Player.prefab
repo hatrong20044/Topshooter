@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eaacd9aae48ab145b30f4da004faa48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statData: {fileID: 11400000, guid: ee81c13b6f46d0b42a63f6549e115c51, type: 2}
+  statData: {fileID: 11400000, guid: 7a67bcac6bd3b9a4ba9474c96b350278, type: 2}
   m_invincibleLayer: 7
   m_normalLayer: 6
   weapon: {fileID: 8721400951831189264}
@@ -252,7 +252,7 @@ MonoBehaviour:
         m_CallState: 2
   m_accelerationSpeed: 400
   m_maxMousePosDistance: 90
-  m_velocityLimit: {x: 5, y: 5}
+  m_velocityLimit: {x: 7, y: 7}
   m_enemyDectionRadius: 12
   m_enemyDetectionLayer:
     serializedVersion: 2
